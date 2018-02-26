@@ -1,0 +1,12 @@
+
+
+- Créer les repas et les menus
+- Faire la génération de la liste de courses
+
+
+
+- Faire un seul champ quantité avec des unités variables
+- améliorer le modèle en mettant les champs required
+- calculer automatiquement les ingrédients si repas pour 4 àpd de recette pour 2 (pour commencer, mettre que des recettes pour 2 et faire des repas pour 2)
+- permettre des menus de taille variable
+- ajouter 3 types de liste de recettes dans un repas : typePlatPrincipal, typeEntree, typeDessert

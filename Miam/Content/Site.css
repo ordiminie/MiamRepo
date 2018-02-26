@@ -1,0 +1,83 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+   /* max-width: 280px; */ 
+}
+
+h2{
+    margin: 20px 0;
+}
+
+/* Custom background class */
+.bg-gray {
+    background-color: #f9f9f9;
+}
+.bg-black {
+    background-color: #222;
+}
+.bg-black label {
+    color: #fff;
+}
+.bg-success,
+.bg-warning{
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+/* Custom button class */
+.btn-back{
+    background-color: #ccc;
+    color:#222;
+}
+a.glyphicon {
+    color: #000;
+}
+a.glyphicon-remove {
+    color: darkred;
+}
+.btn-heading-wrap {
+    margin: 20px 0 20px;
+    text-align: right;
+}
+
+.action{
+    cursor:pointer;
+}
+
+/* Form */
+.container-form{
+    padding: 10px;
+    margin: 20px 0;
+}
+
+/* Validation Form */
+.field-validation-error {
+    color: red;
+}
+
+.input-validation-error{
+    border-color: red;
+    margin-bottom:5px;
+}
+
+/*  */

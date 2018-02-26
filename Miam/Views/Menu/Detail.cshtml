@@ -1,0 +1,54 @@
+﻿@model Miam.ViewModels.MenuFormViewModel
+
+@{
+    ViewBag.Title = "Menu " + Model.Menu.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("_ValidationPartial")
+
+
+<div class="row">
+    <h2 class="col-sm-8">@ViewBag.Title</h2>
+    <p class="col-sm-4 btn-heading-wrap">
+        @Html.ActionLink("Modifier le menu", "Edit", "Menu", new { id = Model.Menu.Id }, new { @class = "btn btn-primary" })
+    </p>
+</div>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>@Html.LabelFor(model => model.Menu.Name)</dt>
+        <dd>@Html.DisplayFor(model => model.Menu.Name)</dd>
+        <dt>@Html.LabelFor(model => model.Menu.Description)</dt>
+        <dd>@Html.DisplayFor(model => model.Menu.Description)</dd>
+        <dt>@Html.LabelFor(model => model.Menu.Duration)</dt>
+        <dd>@Html.DisplayFor(model => model.Menu.Duration)</dd>
+        <dt>@Html.LabelFor(model => model.Menu.BeginDate)</dt>
+        <dd>@Html.DisplayFor(model => model.Menu.BeginDate)</dd>
+    </dl>
+</div>
+
+<div class="row">
+    @foreach(var menuItem in Model.ListMenuItems)
+    { 
+    <div class="col-md-4">
+
+        <h3>@menuItem.Date.ToString("dddd d MMMM")</h3>
+        <p>@menuItem.Meal.Name</p>
+        <p> @menuItem.MomentOfDay | Pour @menuItem.Meal.NbServings personnes</p>
+        <h4>@Html.LabelFor(model => menuItem.Meal.RecipeCollection)</h4>
+        <ul>
+            @foreach (var recipe in menuItem.Meal.RecipeCollection)
+            {
+                <li>@recipe.Name</li>
+            }
+        </ul>
+
+    </div>
+    }
+    <p class="col-sm-4 btn-heading-wrap">
+        @Html.ActionLink("Ajouter un repas", "AddMenuItem", "Menu", new { recipeId = Model.Menu.Id }, new { @class = "btn btn-primary btn-small btn-info" })
+    </p>
+</div>
+
+

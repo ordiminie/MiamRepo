@@ -1,0 +1,40 @@
+﻿@model Miam.Models.Meal
+
+@{
+    ViewBag.Title = "Repas : " + Model.Name ;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("_ValidationPartial")
+
+<div class="row">
+    <h2 class="col-sm-8">@ViewBag.Title</h2>
+    <p class="col-sm-4 btn-heading-wrap">
+        @Html.ActionLink("Modifier le repas", "Edit", "Meal", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    </p>
+</div>
+
+
+<dl class="dl-horizontal">
+
+    <dt>
+        @Html.LabelFor(model => model.NbServings)
+    </dt>
+    <dd>
+        @Model.NbServings
+    </dd>
+
+    <dt>
+        @Html.LabelFor(model => model.RecipeCollection)
+    </dt>
+    @foreach(var item in Model.RecipeCollection)
+    {
+        <dd>
+            @item.Name
+        </dd>
+    }
+</dl>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,56 @@
+﻿@model Miam.ViewModels.IngredientRecipeFormViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("_ValidationPartial")
+
+<h2>@Model.Title</h2>
+
+
+
+<div class="bg-gray container-form">
+    @using (Html.BeginForm("AddOrUpdate", "IngredientRecipe", FormMethod.Post, new { @id = "add-ingredient-recipe" }))
+    {
+        @Html.AntiForgeryToken()        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.IngredientsRecipe.IngredientIndex.Name)
+            @Html.DropDownListFor(m => m.IngredientsRecipe.IngredientIndexId, new SelectList(Model.IngredientsIndexForDropDown, "Id", "Name", "Sélectionner un ingrédient"), new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.IngredientsRecipe.IngredientIndexId)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.IngredientsRecipe.Quantity)
+            @Html.TextBoxFor(m => m.IngredientsRecipe.Quantity, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.IngredientsRecipe.WeightCl)
+            @Html.TextBoxFor(m => m.IngredientsRecipe.WeightCl, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.IngredientsRecipe.WeightGrams)
+            @Html.TextBoxFor(m => m.IngredientsRecipe.WeightGrams, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.IngredientsRecipe.Size)
+            @Html.EnumDropDownListFor(m => m.IngredientsRecipe.Size,  new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.IngredientsRecipe.RecipeId)
+            @Html.TextBoxFor(m => m.IngredientsRecipe.RecipeId, new { @readonly = "readonly" })
+        </div>
+
+        <div class="form-group text-right">
+            @Html.ActionLink("Annuler", "Detail", "Recipe", new { id = Model.IngredientsRecipe.RecipeId }, new { @class = "btn btn-back" })
+            <input type="submit" value="Enregistrer" class="btn btn-success" />
+        </div>
+        @Html.HiddenFor(m => m.IngredientsRecipe.Id)
+    }
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}

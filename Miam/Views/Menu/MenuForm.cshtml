@@ -1,0 +1,73 @@
+﻿@model Miam.ViewModels.MenuFormViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("_ValidationPartial")
+
+<h2>@Model.Title</h2>
+
+<div class="bg-gray container-form">
+    @using (Html.BeginForm("AddOrUpdate", "Menu", FormMethod.Post, new { @id = "form-menu" } ))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Menu.Name, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Menu.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Menu.Name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Menu.Description, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Menu.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Menu.Description, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Menu.Duration, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Menu.Duration, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Menu.Duration, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Menu.BeginDate, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Menu.BeginDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Menu.BeginDate, "", new { @class = "text-danger" })
+            </div>
+
+          <div class="group-form text-right">
+            <button type="submit" class="btn btn-success" >Enregistrer</button>
+          </div>
+
+        @Html.HiddenFor(model => model.Menu.Id)
+    }
+</div>
+
+@*<div class="row">
+    @foreach (var menuItem in Model.ListMenuItems)
+    {
+        <div class="col-md-4">
+
+            <h3>@menuItem.Date.ToString("dddd d MMMM")</h3>
+            <p>@menuItem.Meal.Name</p>
+            <p> @menuItem.MomentOfDay | Pour @menuItem.Meal.NbServings personnes</p>
+            <h4>@Html.LabelFor(model => menuItem.Meal.RecipeCollection)</h4>
+            <ul>
+                @foreach (var recipe in menuItem.Meal.RecipeCollection)
+                {
+                    <li>@recipe.Name</li>
+                }
+            </ul>
+        </div>
+    }
+</div>*@
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section scripts{
+        @Scripts.Render("~/bundles/jqueryval")
+    }

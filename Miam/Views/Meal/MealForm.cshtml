@@ -1,0 +1,85 @@
+﻿@model Miam.ViewModels.MealFormViewModel
+
+@{
+    ViewBag.Title = "MealForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@Html.Partial("_ValidationPartial")
+
+<h2>@Model.Title</h2>
+
+<div class="bg-gray container-form">
+    @using (Html.BeginForm("AddOrUpdate", "Meal", FormMethod.Post, new { @id = "edit-recipe" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Meal.Name)
+            @Html.TextBoxFor(m => m.Meal.Name, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Meal.NbServings)
+            @if (Model.Meal.NbServings > 0)
+            {
+                @Html.DisplayFor(m => m.Meal.NbServings)
+            }
+            else
+            {
+                <p><em>Les repas sont pour 2 personnes</em></p>
+            }
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Meal.RecipeCollection)
+            @if (Model.Meal.RecipeCollection != null)
+            {
+                if (Model.ListRecipesId != null)
+                {
+                    @Html.ListBoxFor(m => m.ListRecipesId, new SelectList(Model.ListRecipesForDropDown, "Id", "Name", new { }), new { @class = "form-control" })
+                }
+                else
+                {
+                    <ul>
+                        @foreach (var recipe in Model.Meal.RecipeCollection)
+                        {
+                            <li>@recipe.Name</li>
+                        }
+                    </ul>
+                }
+            }
+            else
+            {
+                <!-- Faire l'ajout en ajax car on a besoin de l'id du meal -->
+                <!-- ou essayer de mettre une dropdownlist et de faire les deux enregistrements d'un coup -->
+                @Html.ListBoxFor(m => m.ListRecipesId, new SelectList(Model.ListRecipesForDropDown, "Id", "Name", "Sélectionner une recette"), new { @class = "form-control" })
+            }
+            @Html.ValidationMessageFor(m => m.ListRecipesId)
+
+        </div>
+
+        <div class="group-form text-right">
+            @if (Model.Meal.Id > 0)
+            {
+                // Edit mode, back to detail view
+                @Html.ActionLink("Annuler", "Detail", "Meal", new { id = Model.Meal.Id }, new { @class = "btn btn-back" })
+            }
+            else
+            {
+                // Add mode, back to list view
+                @Html.ActionLink("Annuler", "Index", "Meal", null, new { @class = "btn btn-back" })
+            }
+            <button type="submit" class="btn btn-success">Enregistrer</button>
+        </div>
+
+        @Html.HiddenFor(m => m.Meal.Id)
+    }
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

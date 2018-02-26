@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Miam.Models.Meal>
+
+@{
+    ViewBag.Title = "Liste des repas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("_ValidationPartial")
+
+<div class="row">
+    <h2 class="col-sm-8">@ViewBag.Title</h2>
+    <p class="col-sm-4 btn-heading-wrap">
+        @Html.ActionLink("Nouveau repas", "New", null, new { @class = "btn btn-primary" })
+    </p>
+</div>
+
+
+    <table class="table table-hover">
+        <thead class="thead-default p-3 mb-2 bg-dark text-white">
+            <tr class="row">
+                <th class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.NbServings)
+                </th>
+                <th class="col-sm-3 ">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th class="col-sm-5 ">
+                    @Html.DisplayNameFor(model => model.RecipeCollection)
+                </th>
+                <th class="col-sm-2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="row action" actionName="Detail" controllerName="Meal" elementId="@item.Id" >
+                    <td class="col-sm-2">
+                        @Html.DisplayFor(modelItem => item.NbServings)
+                    </td>
+                    <td class="col-sm-3">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td class="col-sm-5">
+                        <ul>
+                            @foreach (var recipe in item.RecipeCollection)
+                {
+                                <li>@recipe.Name</li>
+                            }
+                        </ul>
+                    </td>
+
+                    <td class="col-sm-2 text-right">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+    </table>
+
+@section scripts{
+    @Scripts.Render("~/Scripts/actionRow.miam.js")
+}
