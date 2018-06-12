@@ -1,4 +1,5 @@
 ﻿@model Miam.ViewModels.MenuFormViewModel
+@using Miam.Shared
 
 @{
     ViewBag.Title = "Menu " + Model.Menu.Name;
@@ -15,40 +16,93 @@
     </p>
 </div>
 
-<div>
-    <dl class="dl-horizontal">
-        <dt>@Html.LabelFor(model => model.Menu.Name)</dt>
-        <dd>@Html.DisplayFor(model => model.Menu.Name)</dd>
-        <dt>@Html.LabelFor(model => model.Menu.Description)</dt>
-        <dd>@Html.DisplayFor(model => model.Menu.Description)</dd>
-        <dt>@Html.LabelFor(model => model.Menu.Duration)</dt>
-        <dd>@Html.DisplayFor(model => model.Menu.Duration)</dd>
-        <dt>@Html.LabelFor(model => model.Menu.BeginDate)</dt>
-        <dd>@Html.DisplayFor(model => model.Menu.BeginDate)</dd>
-    </dl>
-</div>
+<p>
+    <em>@Html.DisplayFor(model => model.Menu.Description)</em>
+</p>
 
 <div class="row">
-    @foreach(var menuItem in Model.ListMenuItems)
-    { 
-    <div class="col-md-4">
+    <table border="1" class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th class="text-center text-capitalize">Semaine 1</th>
+                <th class="text-center text-capitalize">Semaine 2</th>
+            </tr>
+        </thead>
+        <tbody>
+        @{int CurrentId = 0;}
+        @{bool IsMealExisted = false;}
+        @{int CurrentWeekNumber = 0;}
+        @{DateTime CurrentDate = DateTime.Today; }
+        @{IEnumerable<Miam.Models.MenuItem> ListMenuItemsByDay;}
 
-        <h3>@menuItem.Date.ToString("dddd d MMMM")</h3>
-        <p>@menuItem.Meal.Name</p>
-        <p> @menuItem.MomentOfDay | Pour @menuItem.Meal.NbServings personnes</p>
-        <h4>@Html.LabelFor(model => menuItem.Meal.RecipeCollection)</h4>
-        <ul>
-            @foreach (var recipe in menuItem.Meal.RecipeCollection)
-            {
-                <li>@recipe.Name</li>
-            }
-        </ul>
+        @foreach (DayOfWeekEnum day in Enum.GetValues(typeof(DayOfWeekEnum)))
+        {
+            <tr>
+                <th class="text-center text-capitalize">@day.DisplayName() </th>
 
-    </div>
-    }
-    <p class="col-sm-4 btn-heading-wrap">
-        @Html.ActionLink("Ajouter un repas", "AddMenuItem", "Menu", new { recipeId = Model.Menu.Id }, new { @class = "btn btn-primary btn-small btn-info" })
-    </p>
+                @for (int i = 0 ; i < 2 ; i++)
+                {
+                    // 1ère semaine
+                    ListMenuItemsByDay = Model.ListMenuItemsWeek1ByDay[(DayOfWeek)day];
+                    
+                    // 2ème semaine
+                    if (i == 1)
+                    {
+                        ListMenuItemsByDay = Model.ListMenuItemsWeek2ByDay[(DayOfWeek)day];
+                        IsMealExisted = false;
+                    }
+
+                    <td padding="5px;">
+                        @foreach (var menuItem in ListMenuItemsByDay)
+                        {
+                            <div>
+                                @if (menuItem.Meal == null)
+                                {
+                                    CurrentId = menuItem.Id;
+                                    IsMealExisted = false;
+                                }
+                                else
+                                {
+                                    <div class="bg-menuitem">
+                                        <h3>@*@menuItem.Date.ToString("dddd d MMMM")*@</h3>
+                                        <h4>
+                                            @Html.ActionLink(" ", "Edit", "MenuItem", new { id = menuItem.Id }, new { @class = "glyphicon glyphicon-pencil", @title = "Modifier" })
+                                            @Html.ActionLink(" ", "Delete", "MenuItem", new { id = menuItem.Id }, new { @class = "glyphicon glyphicon-remove", @title = "Supprimer" })
+                                            @menuItem.MealType.DisplayName()
+                                        </h4>
+                                        <p><strong>@menuItem.Meal.Name</strong></p>
+                                        <ul>
+                                            @foreach (var recipe in menuItem.Meal.RecipeCollection)
+                                            {
+                                                <li>@recipe.Name</li>
+                                            }
+                                        </ul>
+                                    </div>
+
+                                    CurrentId = menuItem.Menu.Id;
+                                    IsMealExisted = true;
+                                    CurrentWeekNumber = menuItem.WeekNumber;
+                                    CurrentDate = menuItem.Date;
+                                }
+                            </div>
+                        }
+                        
+                        @if (IsMealExisted)
+                        {
+                            @Html.ActionLink("Ajouter un repas", "AddAnotherMeal", "MenuItem", new { menuId = CurrentId, weekNumber = CurrentWeekNumber, date = CurrentDate }, new { @class = "btn btn-warning btn-sm" })
+                        }
+                        else
+                        {
+                            <p>Aucun repas</p>
+                            @Html.ActionLink("Ajouter un repas", "AddFirstMeal", "MenuItem", new { menuItemId = CurrentId }, new { @class = "btn btn-warning btn-sm" })
+                        }
+                    </td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>   
 </div>
 
 

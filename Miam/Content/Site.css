@@ -1,5 +1,4 @@
-﻿/* TEST 3 */
-body {
+﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -44,6 +43,13 @@ h2{
     border-radius: 5px;
     margin: 10px 0;
 }
+.bg-menuitem {
+    padding: 2px 5px;
+    margin-bottom: 5px;
+    border: solid 1px #ddd;
+    background-color: #f9f9f9;
+}
+
 
 /* Custom button class */
 .btn-back{
@@ -70,7 +76,10 @@ a.glyphicon-remove {
     padding: 10px;
     margin: 20px 0;
 }
-
+select#ListRecipesId
+{
+    height: 250px;
+}
 /* Validation Form */
 .field-validation-error {
     color: red;

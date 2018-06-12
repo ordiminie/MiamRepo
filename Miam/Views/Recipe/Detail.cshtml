@@ -1,4 +1,6 @@
 ﻿@model Miam.ViewModels.RecipeFormViewModel
+@using Miam.Shared;
+
 @{
     ViewBag.Title = "Recette : " + Model.Recipe.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -23,7 +25,7 @@
     <dt>@Html.LabelFor(m => m.Recipe.CookingTime)</dt>
     <dd>@Model.Recipe.CookingTime</dd>
     <dt>@Html.LabelFor(m => m.Recipe.Level)</dt>
-    <dd>@Model.Recipe.Level</dd>
+    <dd>@Model.Recipe.Level.DisplayName()</dd>
 </dl>
 
 <div class="row">
@@ -65,7 +67,7 @@
     if (item.Size != null)
     {
         <dt>@Html.LabelFor(m => item.Size)</dt>
-        <dd>@item.Size</dd>
+        <dd>@item.Size.DisplayName()</dd>
     }
     <dt>Actions</dt>
     <dd>

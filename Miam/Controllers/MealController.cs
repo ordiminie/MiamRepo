@@ -28,6 +28,9 @@ namespace Miam.Controllers
         public ActionResult Index()
         {
             List<Meal> meals = GetListMeals();
+            ViewBag.MessageSuccess = TempData["MessageSuccess"];
+            ViewBag.MessageError = TempData["MessageError"];
+
             return View(meals);
         }
 
@@ -35,9 +38,9 @@ namespace Miam.Controllers
         {
             Meal meal = GetMealById(id);
             ViewBag.MessageSuccess = TempData["MessageSuccess"];
+            ViewBag.MessageError = TempData["MessageError"];
 
             return View("Detail", meal);
-               
         }
 
         public ActionResult New()
@@ -92,7 +95,7 @@ namespace Miam.Controllers
                 addedRecipe.ForEach(r => listRecipeFromDb.Add(r));
 
                 // Mise à jour du repas
-                mealFromDb.Name = GenerateRecipeName(mealFVM.Meal.Name, listRecipeFromForm);
+                mealFromDb.Name = mealFVM.Meal.Name; //GenerateRecipeName(mealFVM.Meal.Name, listRecipeFromForm, mealFVM.UpdateMealName);
                 mealFromDb.NbServings = mealFVM.Meal.NbServings;
 
                 _ctx.SaveChanges();
@@ -113,7 +116,7 @@ namespace Miam.Controllers
                 // ou si on est en train de créer un itemMenu, on peut l'ajouter direct
 
                 // Si le nom est vide, on le créé à partir des noms des recettes
-                newMeal.Name = GenerateRecipeName(mealFVM.Meal.Name, listRecipesFromForm);
+                newMeal.Name = GenerateRecipeName(mealFVM.Meal.Name, listRecipesFromForm, mealFVM.UpdateMealName);
                 
                 newMeal.NbServings = mealFVM.Meal.NbServings;
                 
@@ -131,12 +134,30 @@ namespace Miam.Controllers
             return RedirectToAction("Detail", new { id = mealId });
         }
 
-        private string GenerateRecipeName(string nameFVM, List<Recipe> listRecipe)
+        public ActionResult Delete (int id)
+        {
+            Meal mealToDelete = _ctx.Meal.FirstOrDefault(m => m.Id == id);
+
+            if (mealToDelete == null)
+                return HttpNotFound();
+
+            _ctx.Meal.Remove(mealToDelete);
+
+            _ctx.SaveChanges();
+
+            TempData["MessageSuccess"] = "Le repas a bien été supprimé.";
+
+            return RedirectToAction("Index");
+
+        }
+
+        private string GenerateRecipeName(string nameFVM, List<Recipe> listRecipes, bool updateMealName)
         {
             string name = String.Empty;
-            if (String.IsNullOrEmpty(nameFVM) && (listRecipe.Count() > 0))
+            if ((String.IsNullOrEmpty(nameFVM) && (listRecipes.Count() > 0))
+                || updateMealName)
             {
-                foreach (Recipe item in listRecipe)
+                foreach (Recipe item in listRecipes)
                 {
                     name += item.Name + " + ";
                 }

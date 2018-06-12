@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Miam.Shared;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Miam.Models
         public int Id { get; set; }
 
         // Foreign key
-        public int MealId { get; set; }
+        public int? MealId { get; set; }
         public int MenuId { get; set; }
 
         // Navigation property
@@ -22,14 +23,9 @@ namespace Miam.Models
         [Display(Name="Date")]
         public DateTime Date { get; set; }
 
-        [Display(Name ="Moment (matin/midi/soir)")]
-        public string MomentOfDay { get; set; }
+        [Display(Name ="Type de repas")]
+        public MealTypeEnum MealType { get; set; }
 
-        [Display(Name = "Petit déj'")]
-        public static string Morning = "Morning";
-        [Display(Name = "Midi")]
-        public static string Noon = "Noon";
-        [Display(Name = "Soir")]
-        public static string Evening = "Evening";
+        public int WeekNumber { get; set; }
     }
 }

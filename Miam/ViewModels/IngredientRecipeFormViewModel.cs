@@ -11,7 +11,7 @@ namespace Miam.ViewModels
         public int Id { get; set; }
         public IngredientRecipe IngredientsRecipe { get; set; } 
         
-        // pour afficher sous forme de liste TOUTES les options (et pas QUE celle de l'objet courant
+        // pour afficher sous forme de liste TOUTES les options (et pas QUE celle de l'objet courant)
         public IEnumerable<IngredientIndex> IngredientsIndexForDropDown { get; set; }
 
         public string Title

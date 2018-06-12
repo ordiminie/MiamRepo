@@ -1,4 +1,4 @@
-﻿using static Miam.Shared.Enumeration;
+﻿using Miam.Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

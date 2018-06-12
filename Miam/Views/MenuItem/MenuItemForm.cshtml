@@ -1,0 +1,51 @@
+﻿@model Miam.ViewModels.MenuItemFormViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="@Url.Content("~/Content/jquery-ui.datepicker.min.css")" rel="stylesheet" />
+@Html.Partial("_ValidationPartial")
+
+<h2>@Model.Title</h2>
+
+<div class="bg-gray container-form">
+    @using (Html.BeginForm("AddOrUpdate", "MenuItem", FormMethod.Post, new { @id = "edit-menuItem" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @{var culture = new System.Globalization.CultureInfo("fr-FR"); }
+            @{var day = culture.DateTimeFormat.GetDayName(Model.MenuItem.Date.DayOfWeek); }
+
+            <label>@day.ToUpper() de la semaine @Model.MenuItem.WeekNumber</label>
+            @Html.TextBoxFor(model => model.MenuItem.Date, "{0:dd/MM/yyyy}", htmlAttributes: new { @type = "text", @id = "menuitem-date", @class = "form-control datepicker", @readonly = "readonly" })   
+            @Html.ValidationMessageFor(model => model.MenuItem.Date, "", new { @class = "text-danger", data_valmsg_for = "menuitemdate" })
+        </div>  
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.MenuItem.MealType)
+            @Html.EnumDropDownListFor(m => m.MenuItem.MealType, new { @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.MenuItem.MealType)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.MenuItem.Meal.Name)
+            @Html.DropDownListFor(m => m.MenuItem.MealId, new SelectList(Model.ListMealsForDropDown, "Id", "Name", "Sélectionner un repas"), new { @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.MenuItem.MealId)
+        </div>
+
+        <div class="group-form text-right">
+            <button type="submit" class="btn btn-success">Enregistrer</button>
+        </div>
+
+        @Html.HiddenFor(m => m.MenuItem.Id)
+        @Html.HiddenFor(m => m.MenuItem.MenuId)
+        @Html.HiddenFor(m => m.MenuItem.WeekNumber)
+    }
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="@Scripts.Url("~/Scripts/Miam.DateFormatValidation.js")"></script>
+}
+

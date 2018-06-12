@@ -1,7 +1,6 @@
 ﻿@model Miam.ViewModels.MealFormViewModel
 
 @{
-    ViewBag.Title = "MealForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -19,6 +18,11 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Meal.Name)
             @Html.TextBoxFor(m => m.Meal.Name, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.CheckBoxFor(m => m.UpdateMealName)
+            @Html.LabelFor(m => m.UpdateMealName)
         </div>
 
         <div class="form-group">

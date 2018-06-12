@@ -11,6 +11,9 @@ namespace Miam.ViewModels
     {
         public int Id { get; set; }
 
+        [Display(Name = "Nommer automatiquement le repas avec les noms des recettes qui le composent")]
+        public bool UpdateMealName { get; set; }
+
         public Meal Meal { get; set; }
 
         public IEnumerable<Recipe> ListRecipesForDropDown { get; set; }

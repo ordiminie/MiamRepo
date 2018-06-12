@@ -27,10 +27,10 @@ namespace Miam.Controllers
         // Display all recipe
         public ActionResult Index()
         {
-            DbSet<Recipe> recipes = GetRecipes();
+            List<Recipe> listRecipes = GetListRecipes();
             ViewBag.MessageSuccess = TempData["MessageSuccess"];
 
-            return View(recipes.ToList());
+            return View(listRecipes);
         }
 
         public ActionResult Detail(int id)
@@ -142,14 +142,12 @@ namespace Miam.Controllers
 
         public ActionResult Delete(int id)
         {
-            // Delete ingredients
-            List<IngredientRecipe> ListIngredient = _ctx.IngredientRecipe.Where(m => m.RecipeId == id).ToList();
+            // Supprime le lien entre les ingredients et la recette à supprimer
+            List<IngredientRecipe> listIngredients = _ctx.IngredientRecipe.Where(m => m.RecipeId == id).ToList();
 
-            if (ListIngredient != null)
+            if (listIngredients != null)
             {
-                // TODO Afficher un message de confirmation client-side
-                
-                foreach(IngredientRecipe ing in ListIngredient)
+                foreach(IngredientRecipe ing in listIngredients)
                 {
                     _ctx.IngredientRecipe.Remove(ing);
                 }
@@ -173,9 +171,9 @@ namespace Miam.Controllers
 
 
         // Get all recipes
-        private DbSet<Recipe> GetRecipes()
+        private List<Recipe> GetListRecipes()
         {
-            return _ctx.Recipe;
+            return _ctx.Recipe.ToList();
         }
     }
 }

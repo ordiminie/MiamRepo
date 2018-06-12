@@ -112,19 +112,22 @@ namespace Miam.Migrations
             //context.Meal.AddOrUpdate(meal2);
             #endregion
 
+
             #region AJOUT DONNEES MENU + TABLE DE LIAISON MENUMEAL
             //Meal meal1 = context.Meal.FirstOrDefault(m => m.DayOfWeek == "lundi");
-            //Meal meal2 = context.Meal.FirstOrDefault(m => m.DayOfWeek == "jeudi");
+            //Meal meal2 = context.Meal.firstordefault(m => m.dayofweek == "jeudi");
             //Menu menu = new Menu
             //{
-            //    BeginDate = DateTime.Today,
-            //    MealCollection = new List<Meal>()
+            //    begindate = datetime.today,
+            //    mealcollection = new list<meal>()
             //};
 
-            //menu.MealCollection.Add(meal1);
-            //menu.MealCollection.Add(meal2);
+            //menu.mealcollection.add(meal1);
+            //menu.mealcollection.add(meal2);
 
-            //context.Menu.Add(menu);
+            //context.menu.add(menu);
+
+
             #endregion
 
             #region AJOUT DONNEES MEAL + TABLE DE LIAISON RECIPEMEAL
@@ -140,21 +143,31 @@ namespace Miam.Migrations
             #endregion
 
             #region AJOUT DONNEES MENU + MENUITEM
-            //Menu menu1 = context.Menu.FirstOrDefault(m => m.Id == 3);
+            //// Menu menu1 = context.Menu.FirstOrDefault(m => m.Id == 3);
+            //Menu menu1 = new Menu();
             //menu1.Name = "été 2016";
             //menu1.Duration = 14;
-            //menu1.BeginDate = new DateTime(2017, 06, 04);
+            //menu1.BeginDate = new DateTime(2017, 06, 23);
             //menu1.Description = "14 jours de repas programmé";
             //context.Menu.AddOrUpdate(menu1);
 
             //MenuItem menuItem = new MenuItem
             //{
             //    Date = new DateTime(2017, 06, 05),
-            //    MenuId = 3,
-            //    MealId = 4,
-            //    MomentOfDay = MenuItem.Evening
+            //    MenuId = context.Menu.FirstOrDefault(m => m.Name == "été 2016").Id,
+            //    MealId = 4
+            //    , MealType = Shared.MealTypeEnum.Evening
             //};
             //context.MenuItem.AddOrUpdate(menuItem);
+
+            //MenuItem menuItem2 = new MenuItem
+            //{
+            //    Date = new DateTime(2017, 10, 18),
+            //    MenuId = context.Menu.FirstOrDefault(m => m.Name == "été 2016").Id,
+            //    MealId = 22
+            //    , MealType = Shared.MealTypeEnum.Noon
+            //};
+            //context.MenuItem.AddOrUpdate(menuItem2);
 
             #endregion
 

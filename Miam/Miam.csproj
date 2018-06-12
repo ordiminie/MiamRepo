@@ -195,6 +195,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MealController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\MenuItemController.cs" />
     <Compile Include="Controllers\RecipeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -367,6 +368,54 @@
     <Compile Include="Migrations\201710151750538_UpdateMenuModel.Designer.cs">
       <DependentUpon>201710151750538_UpdateMenuModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803051812308_AddMenuFormViewModel.cs" />
+    <Compile Include="Migrations\201803051812308_AddMenuFormViewModel.Designer.cs">
+      <DependentUpon>201803051812308_AddMenuFormViewModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804011945065_AddTestDateToMenuFVM.cs" />
+    <Compile Include="Migrations\201804011945065_AddTestDateToMenuFVM.Designer.cs">
+      <DependentUpon>201804011945065_AddTestDateToMenuFVM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804021840395_RemoveTestDateToMenuFVM.cs" />
+    <Compile Include="Migrations\201804021840395_RemoveTestDateToMenuFVM.Designer.cs">
+      <DependentUpon>201804021840395_RemoveTestDateToMenuFVM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804051649404_AddUpdateMealNameToMealFVM.cs" />
+    <Compile Include="Migrations\201804051649404_AddUpdateMealNameToMealFVM.Designer.cs">
+      <DependentUpon>201804051649404_AddUpdateMealNameToMealFVM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804051828209_AddMealTypeEnumToMenuItemModel.cs" />
+    <Compile Include="Migrations\201804051828209_AddMealTypeEnumToMenuItemModel.Designer.cs">
+      <DependentUpon>201804051828209_AddMealTypeEnumToMenuItemModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804051938008_AddMenuItemFVM.cs" />
+    <Compile Include="Migrations\201804051938008_AddMenuItemFVM.Designer.cs">
+      <DependentUpon>201804051938008_AddMenuItemFVM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805241139016_UpdateMenuModel1.cs" />
+    <Compile Include="Migrations\201805241139016_UpdateMenuModel1.Designer.cs">
+      <DependentUpon>201805241139016_UpdateMenuModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805242128512_MakeNullableMealIntoMenuItemModel.cs" />
+    <Compile Include="Migrations\201805242128512_MakeNullableMealIntoMenuItemModel.Designer.cs">
+      <DependentUpon>201805242128512_MakeNullableMealIntoMenuItemModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805261240392_AddILookupFieldToMenuFVM.cs" />
+    <Compile Include="Migrations\201805261240392_AddILookupFieldToMenuFVM.Designer.cs">
+      <DependentUpon>201805261240392_AddILookupFieldToMenuFVM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806031825542_MakeNullableBeginDateInMenuModel.cs" />
+    <Compile Include="Migrations\201806031825542_MakeNullableBeginDateInMenuModel.Designer.cs">
+      <DependentUpon>201806031825542_MakeNullableBeginDateInMenuModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806031901559_MakeRequiredBeginDateInMenuModel.cs" />
+    <Compile Include="Migrations\201806031901559_MakeRequiredBeginDateInMenuModel.Designer.cs">
+      <DependentUpon>201806031901559_MakeRequiredBeginDateInMenuModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806052009475_AddWeekNumberToMenuItemModel.cs" />
+    <Compile Include="Migrations\201806052009475_AddWeekNumberToMenuItemModel.Designer.cs">
+      <DependentUpon>201806052009475_AddWeekNumberToMenuItemModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -384,11 +433,19 @@
     <Compile Include="ViewModels\IngredientRecipeFormViewModel.cs" />
     <Compile Include="ViewModels\MealFormViewModel.cs" />
     <Compile Include="ViewModels\MenuFormViewModel.cs" />
+    <Compile Include="ViewModels\MenuItemFormViewModel.cs" />
     <Compile Include="ViewModels\RecipeFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\jquery-ui.datepicker.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -403,10 +460,13 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-ui.datepicker.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Miam.DateFormatValidation.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -460,6 +520,7 @@
     <Content Include="Views\Meal\Detail.cshtml" />
     <Content Include="Views\Meal\MealForm.cshtml" />
     <Content Include="Views\Menu\MenuForm.cshtml" />
+    <Content Include="Views\MenuItem\MenuItemForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -605,6 +666,42 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710151750538_UpdateMenuModel.resx">
       <DependentUpon>201710151750538_UpdateMenuModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803051812308_AddMenuFormViewModel.resx">
+      <DependentUpon>201803051812308_AddMenuFormViewModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804011945065_AddTestDateToMenuFVM.resx">
+      <DependentUpon>201804011945065_AddTestDateToMenuFVM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804021840395_RemoveTestDateToMenuFVM.resx">
+      <DependentUpon>201804021840395_RemoveTestDateToMenuFVM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804051649404_AddUpdateMealNameToMealFVM.resx">
+      <DependentUpon>201804051649404_AddUpdateMealNameToMealFVM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804051828209_AddMealTypeEnumToMenuItemModel.resx">
+      <DependentUpon>201804051828209_AddMealTypeEnumToMenuItemModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804051938008_AddMenuItemFVM.resx">
+      <DependentUpon>201804051938008_AddMenuItemFVM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805241139016_UpdateMenuModel1.resx">
+      <DependentUpon>201805241139016_UpdateMenuModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805242128512_MakeNullableMealIntoMenuItemModel.resx">
+      <DependentUpon>201805242128512_MakeNullableMealIntoMenuItemModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805261240392_AddILookupFieldToMenuFVM.resx">
+      <DependentUpon>201805261240392_AddILookupFieldToMenuFVM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806031825542_MakeNullableBeginDateInMenuModel.resx">
+      <DependentUpon>201806031825542_MakeNullableBeginDateInMenuModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806031901559_MakeRequiredBeginDateInMenuModel.resx">
+      <DependentUpon>201806031901559_MakeRequiredBeginDateInMenuModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806052009475_AddWeekNumberToMenuItemModel.resx">
+      <DependentUpon>201806052009475_AddWeekNumberToMenuItemModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

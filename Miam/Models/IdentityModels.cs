@@ -24,6 +24,7 @@ namespace Miam.Models
         public DbSet<Recipe> Recipe { get; set; }
         public DbSet<IngredientRecipe> IngredientRecipe { get; set; }
         public DbSet<Meal> Meal { get; set; }
+        //public DbSet<MealRecipe> MealRecipe { get; set; }
         public DbSet<Menu> Menu { get; set; }
         public DbSet<MenuItem> MenuItem { get; set; }
 
@@ -43,5 +44,9 @@ namespace Miam.Models
         public System.Data.Entity.DbSet<Miam.ViewModels.IngredientRecipeFormViewModel> IngredientRecipeFormViewModels { get; set; }
 
         public System.Data.Entity.DbSet<Miam.ViewModels.MealFormViewModel> MealFormViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<Miam.ViewModels.MenuFormViewModel> MenuFormViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<Miam.ViewModels.MenuItemFormViewModel> MenuItemFormViewModels { get; set; }
     }
 }
